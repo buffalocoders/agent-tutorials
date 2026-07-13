@@ -22,6 +22,6 @@ class AgentSettings(BaseSettings):
     OPENAI_URL: str
 
 
-@lru_cache()
+@lru_cache
 def get_settings():
     return AgentSettings()

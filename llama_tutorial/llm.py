@@ -1,10 +1,13 @@
 # **********************************************************
-#                   llama-index-llms-openai 使用教程
+#                llama-index-llms-openai-like
 # **********************************************************
-from llama_index.llms.openai import OpenAI
+from llama_index.llms.openai_like import OpenAILike
 from cores.config import get_settings, AgentSettings
 from llama_index.core.llms import ChatMessage
 import asyncio
+from tools.logs import get_logger
+
+logger = get_logger(__name__)
 
 
 async def get_llm(settings: AgentSettings):
@@ -13,21 +16,23 @@ async def get_llm(settings: AgentSettings):
     :param settings:
     :return:
     """
-    return OpenAI(
+    return OpenAILike(
+        is_chat_model=True,  # 必须设置才能跳过白名单的检查
         model=settings.OPENAI_MODEL,
+        api_base=settings.OPENAI_URL,
         api_key=settings.OPENAI_API_KEY,
-        api_base=settings.OPENAI_URL
+        context_window=settings.CONTEXT_WINDOW
     )
 
 
 async def main():
-    # ====== complete ====== #
     settings = get_settings()
     llm = await get_llm(settings)
-    response = llm.complete(
-        prompt="RAG是"
-    )
 
+    response = llm.chat(messages=[ChatMessage(
+        content="Rag是什么？"
+    )])
+    logger.info(response)
 
 
 if __name__ == "__main__":

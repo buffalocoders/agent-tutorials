@@ -16,10 +16,16 @@ class AgentSettings(BaseSettings):
         case_sensitive=True,
     )
 
-    # ====== llm ====== #
+    # ====== llm openai ====== #
     OPENAI_MODEL: str
     OPENAI_API_KEY: str
     OPENAI_URL: str
+    CONTEXT_WINDOW: int
+
+    # ====== anthropic ====== #
+    ANTHROPIC_URL: str
+    ANTHROPIC_MODEL: str
+    ANTHROPIC_KEY: str
 
 
 @lru_cache

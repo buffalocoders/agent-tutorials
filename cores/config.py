@@ -22,10 +22,10 @@ class AgentSettings(BaseSettings):
     OPENAI_URL: str
     CONTEXT_WINDOW: int
 
-    # ====== anthropic ====== #
-    ANTHROPIC_URL: str
-    ANTHROPIC_MODEL: str
-    ANTHROPIC_KEY: str
+    # ====== siliconflow ====== #
+    SF_MODEL: str
+    SF_API_KEY: str
+    SF_EMBEDDING: str
 
 
 @lru_cache

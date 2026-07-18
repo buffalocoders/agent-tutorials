@@ -6,6 +6,9 @@ import asyncio
 from llama_index.llms.siliconflow import SiliconFlow
 from llama_index.embeddings.siliconflow import SiliconFlowEmbedding
 from .config import get_settings, AgentSettings
+from llama_index.llms.openai_like import OpenAILike
+
+
 import structlog
 
 Settings = get_settings()
@@ -21,6 +24,18 @@ async def get_llm():
         api_key=Settings.SF_API_KEY,
     )
 
+async def get_openai_llm():
+    """
+    创建 openai like 模型
+    :return:
+    """
+    return OpenAILike(
+        is_chat_model=True,
+        model=Settings.OPENAI_MODEL,
+        api_key=Settings.OPENAI_API_KEY,
+        api_base=Settings.OPENAI_URL,
+        is_function_calling_model=True
+    )
 
 async def get_embedding():
     """

@@ -26,6 +26,7 @@ class AgentSettings(BaseSettings):
     SF_MODEL: str
     SF_API_KEY: str
     SF_EMBEDDING: str
+    SF_URL: str
 
 
 @lru_cache
